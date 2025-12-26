@@ -5,6 +5,8 @@ import HeroSection from '@/components/HeroSection';
 import OrderSection from '@/components/OrderSection';
 import InteractiveSection from '@/components/InteractiveSection';
 import Footer from '@/components/Footer';
+import MethodologySection from '@/components/MethodologySection';
+import TrustSection from '@/components/TrustSection';
 // import { ReactLenis } from '@studio-freight/react-lenis'; // Removed here as it's in layout.tsx, or we can leave it if specific config needed per page
 
 // IMPORTAÇÃO DINÂMICA: Isso resolve o erro "window is not defined"
@@ -20,6 +22,8 @@ export default function Home() {
             <ChaosSection />
             <OrderSection />
             <InteractiveSection />
+            <MethodologySection />
+            <TrustSection />
             <Footer />
         </main>
     );

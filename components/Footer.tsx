@@ -1,6 +1,8 @@
 'use client';
 
-import { ArrowRight, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
     return (
@@ -35,43 +37,7 @@ export default function Footer() {
                     </div>
 
                     {/* Coluna Direita: O Formulário Estilo "Contrato" */}
-                    <form className="space-y-8 bg-white/5 p-8 md:p-12 rounded-3xl border border-white/5 backdrop-blur-sm" onSubmit={(e) => e.preventDefault()}>
-                        <div className="space-y-2">
-                            <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">Nome Completo</label>
-                            <input
-                                type="text"
-                                placeholder="Ex: Roberto Silva"
-                                className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">E-mail Corporativo</label>
-                            <input
-                                type="email"
-                                placeholder="roberto@suaempresa.com.br"
-                                className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">WhatsApp</label>
-                            <input
-                                type="tel"
-                                placeholder="(11) 99999-9999"
-                                className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
-                            />
-                        </div>
-
-                        <button className="group w-full bg-white text-black font-mono font-bold py-5 px-8 rounded-full mt-8 hover:bg-amber-400 transition-colors flex items-center justify-between">
-                            <span>SOLICITAR DIAGNÓSTICO</span>
-                            <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                        </button>
-
-                        <p className="text-[10px] text-center text-gray-500 font-mono pt-4">
-                            Ao clicar, você concorda com nossa política de confidencialidade de dados (NDAs).
-                        </p>
-                    </form>
+                    <ContactForm />
 
                 </div>
 
@@ -85,5 +51,83 @@ export default function Footer() {
                 </div>
             </div>
         </footer>
+    );
+}
+
+function ContactForm() {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Simulação de envio
+        setTimeout(() => {
+            setIsSubmitted(true);
+        }, 1000);
+    };
+
+    if (isSubmitted) {
+        return (
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="h-full flex flex-col items-center justify-center bg-white/5 p-12 rounded-3xl border border-green-500/20 text-center space-y-6"
+            >
+                <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 border border-green-500/20">
+                    <CheckCircle className="w-10 h-10" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">Solicitação Recebida</h3>
+                <p className="text-gray-400 font-mono text-sm">
+                    Nossa equipe técnica analisará seu perfil e entrará em contato em até 2 horas.
+                </p>
+                <div className="pt-4">
+                    <span className="text-xs text-green-500 font-mono border border-green-500/30 px-3 py-1 rounded-full bg-green-500/5">
+                        PROTOCOLO: #LST-{Math.floor(Math.random() * 9999)}
+                    </span>
+                </div>
+            </motion.div>
+        );
+    }
+
+    return (
+        <form className="space-y-8 bg-white/5 p-8 md:p-12 rounded-3xl border border-white/5 backdrop-blur-sm" onSubmit={handleSubmit}>
+            <div className="space-y-2">
+                <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">Nome Completo</label>
+                <input
+                    type="text"
+                    required
+                    placeholder="Ex: Roberto Silva"
+                    className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
+                />
+            </div>
+
+            <div className="space-y-2">
+                <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">E-mail Corporativo</label>
+                <input
+                    type="email"
+                    required
+                    placeholder="roberto@suaempresa.com.br"
+                    className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
+                />
+            </div>
+
+            <div className="space-y-2">
+                <label className="text-xs font-mono text-amber-500 uppercase tracking-widest">WhatsApp</label>
+                <input
+                    type="tel"
+                    required
+                    placeholder="(11) 99999-9999"
+                    className="w-full bg-transparent border-b border-white/20 py-4 text-white font-serif text-xl focus:outline-none focus:border-amber-500 transition-colors placeholder:text-white/20"
+                />
+            </div>
+
+            <button type="submit" className="group w-full bg-white text-black font-mono font-bold py-5 px-8 rounded-full mt-8 hover:bg-amber-400 transition-colors flex items-center justify-between">
+                <span>SOLICITAR DIAGNÓSTICO</span>
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <p className="text-[10px] text-center text-gray-500 font-mono pt-4">
+                Ao clicar, você concorda com nossa política de confidencialidade de dados (NDAs).
+            </p>
+        </form>
     );
 }

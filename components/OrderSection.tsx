@@ -50,7 +50,7 @@ export default function OrderSection() {
     };
 
     return (
-        <section className="h-screen w-full bg-[#030303] flex flex-col items-center justify-center px-4 relative">
+        <section className="min-h-screen w-full bg-[#030303] flex flex-col items-center justify-center px-4 relative py-20">
 
             {/* Background Ambience */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-amber-500/10 to-amber-600/10 rounded-full blur-[120px] pointer-events-none" />
